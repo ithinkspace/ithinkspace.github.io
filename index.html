@@ -10,8 +10,9 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
             line-height: 1.5;
             margin: 0;
-            background-color: #ffffff;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             color: #24292e;
+            min-height: 100vh;
         }
 
         .container {
@@ -22,8 +23,47 @@
 
         .header {
             margin-bottom: 24px;
-            padding-bottom: 24px;
-            border-bottom: 1px solid #e1e4e8;
+            padding: 24px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            margin: 0 0 16px 0;
+            color: #2d3748;
+        }
+
+        .contact-info {
+            font-size: 14px;
+            color: #4a5568;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .contact-info p {
+            margin: 4px 0;
+        }
+
+        /* Select2 Custom Styles */
+        .select2-container {
+            width: auto !important;
+        }
+
+        .select2-container .select2-selection--single {
+            height: 38px !important;
+            border: 1px solid #e1e4e8 !important;
+            border-radius: 6px !important;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            line-height: 36px !important;
+            padding-left: 12px !important;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 36px !important;
         }
 
         .tabs {
@@ -32,6 +72,9 @@
             margin-bottom: 24px;
             position: relative;
             flex-wrap: wrap;
+            background: white;
+            border-radius: 12px 12px 0 0;
+            padding: 0 16px;
         }
 
         .tab {
@@ -42,11 +85,12 @@
             border: none;
             background: none;
             position: relative;
-            transition: color 0.2s ease;
+            transition: all 0.2s ease;
         }
 
         .tab:hover {
             color: #24292e;
+            background: rgba(0, 0, 0, 0.05);
         }
 
         .tab.active {
@@ -65,48 +109,48 @@
         .filters {
             margin-bottom: 24px;
             display: flex;
-            flex-wrap: wrap;
             gap: 16px;
             align-items: center;
+            background: white;
+            padding: 16px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
-        select, input {
-            padding: 8px;
+        input[type="text"] {
+            padding: 8px 12px;
             border: 1px solid #e1e4e8;
             border-radius: 6px;
             font-size: 14px;
             color: #24292e;
-            min-width: 120px;
-        }
-
-        select {
-            background-color: #ffffff;
-        }
-
-        input[type="text"] {
-            flex: 1;
-            min-width: 200px;
+            width: 300px; /* 设置固定宽度，根据实际最长标题调整 */
+            transition: all 0.2s ease;
+            height: 38px;
+            box-sizing: border-box;
         }
 
         @media (max-width: 768px) {
             .filters {
                 flex-direction: column;
-                align-items: stretch;
             }
 
-            select, input {
-                width: 100%;
+            input[type="text"] {
+                width: 100%; /* 在移动设备上保持全宽 */
             }
 
-            .tab {
-                padding: 12px;
-                font-size: 13px;
-            }
+            [其他样式保持不变]
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #0366d6;
+            box-shadow: 0 0 0 3px rgba(3, 102, 214, 0.3);
         }
 
         .job-list {
-            border: 1px solid #e1e4e8;
-            border-radius: 6px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
             display: none;
             opacity: 0;
             transition: opacity 0.3s ease;
@@ -120,6 +164,11 @@
         .job-item {
             padding: 16px;
             border-bottom: 1px solid #e1e4e8;
+            transition: all 0.2s ease;
+        }
+
+        .job-item:hover {
+            background-color: #f6f8fa;
         }
 
         .job-item:last-child {
@@ -137,6 +186,7 @@
         }
 
         .job-title:hover {
+            color: #0246a2;
             text-decoration: underline;
         }
 
@@ -150,10 +200,12 @@
         }
 
         .no-results {
-            padding: 16px;
+            padding: 32px;
             text-align: center;
             color: #586069;
             display: none;
+            background: #f8f9fa;
+            border-radius: 8px;
         }
 
         footer {
@@ -161,13 +213,41 @@
             text-align: center;
             color: #586069;
             font-size: 12px;
+            background: white;
+            padding: 16px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .filters {
+                flex-direction: column;
+            }
+
+            .select2-container {
+                width: 100% !important;
+            }
+
+            input[type="text"] {
+                width: 100%;
+            }
+
+            .tab {
+                padding: 12px;
+                font-size: 13px;
+            }
         }
     </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>江苏事业单位/国企/高校招聘信息</h1>
+            <div class="contact-info">
+                <p>邮箱：igrainrain@163.com</p>
+                <p>微信：xxxx</p>
+            </div>
         </div>
 
         <div class="tabs">
@@ -185,17 +265,17 @@
         <div class="filters">
             <select id="sourceFilter">
                 <option value="">全部来源</option>
-                <option value="高校人才网（江苏高校）">高校人才网（江苏高校）</option>
+                <option value="南京市教育局(教师招聘)">南京市教育局(教师招聘)</option>
+                <option value="江苏人事人才公共服务网（事业）">江苏人事人才公共服务网（事业）</option>
+                <option value="江苏人事人才公共服务网（企业）">江苏人事人才公共服务网（企业）</option>
+                <option value="江苏人事人才公共服务网（民办）">江苏人事人才公共服务网（民办）</option>
+                <option value="江苏省农业科学院">江苏省农业科学院</option>
                 <option value="高校人才网（江苏中小学）">高校人才网（江苏中小学）</option>
-                <option value="高校人才网（江苏科研）">高校人才网（江苏科研）</option>
-                <option value="高校人才网（江苏机关事业）">高校人才网（江苏机关事业）</option>
                 <option value="高校人才网（江苏企业）">高校人才网（江苏企业）</option>
                 <option value="高校人才网（江苏医学）">高校人才网（江苏医学）</option>
-                <option value="江苏人事人才公共服务网（事业）">江苏人事人才公共服务网（事业）</option>
-                <option value="南京市教育局(教师招聘)">南京市教育局(教师招聘)</option>
-                <option value="江苏人事人才公共服务网（民办）">江苏人事人才公共服务网（民办）</option>
-                <option value="江苏人事人才公共服务网（企业）">江苏人事人才公共服务网（企业）</option>
-                <option value="江苏省农业科学院">江苏省农业科学院</option>
+                <option value="高校人才网（江苏机关事业）">高校人才网（江苏机关事业）</option>
+                <option value="高校人才网（江苏科研）">高校人才网（江苏科研）</option>
+                <option value="高校人才网（江苏高校）">高校人才网（江苏高校）</option>
 
             </select>
             <input type="text" id="searchInput" placeholder="搜索职位...">
@@ -239,20 +319,6 @@
                     <span class="date">2025-01-26</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏高校）" data-title="南京理工大学2025年诚邀英才依托申报海外优青项目">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/289121.html" class="job-title" target="_blank">南京理工大学2025年诚邀英才依托申报海外优青项目</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏高校）</span>
-                    <span class="date">2025-01-24</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="南京大学医学院附属鼓楼医院脊柱外科2025年面向海内外招聘全职PI和科研型博士后">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/289056.html" class="job-title" target="_blank">南京大学医学院附属鼓楼医院脊柱外科2025年面向海内外招聘全职PI和科研型博士后</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏科研）</span>
-                    <span class="date">2025-01-24</span>
-                </div>
-            </div>
             <div class="job-item" data-source="高校人才网（江苏高校）" data-title="南京大学国际地学大数据团队2025年招聘4名大数据录入专员">
                 <a href="https://www.gaoxiaojob.com/announcement/detail/289144.html" class="job-title" target="_blank">南京大学国际地学大数据团队2025年招聘4名大数据录入专员</a>
                 <div class="job-meta">
@@ -260,43 +326,8 @@
                     <span class="date">2025-01-24</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏机关事业）" data-title="江苏省淮安市医师协会2025年招聘1名工作人员公告">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/289081.html" class="job-title" target="_blank">江苏省淮安市医师协会2025年招聘1名工作人员公告</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏机关事业）</span>
-                    <span class="date">2025-01-24</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="江苏省宜兴市宜能实业有限公司2025年1月招聘2名线路设计辅助人员">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288975.html" class="job-title" target="_blank">江苏省宜兴市宜能实业有限公司2025年1月招聘2名线路设计辅助人员</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏企业）</span>
-                    <span class="date">2025-01-24</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="徐州市撷秀中学（徐州一中夹河街校区）2025年公开招聘教师">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/289023.html" class="job-title" target="_blank">徐州市撷秀中学（徐州一中夹河街校区）2025年公开招聘教师</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏中小学）</span>
-                    <span class="date">2025-01-24</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="江苏省淮安经济技术开发区空港卓文高级中学2025年秋季招聘储备教师公告">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288993.html" class="job-title" target="_blank">江苏省淮安经济技术开发区空港卓文高级中学2025年秋季招聘储备教师公告</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏中小学）</span>
-                    <span class="date">2025-01-24</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏高校）" data-title="钟山职业技术学院2025年现代家政服务与管理专业教师招聘公告">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288984.html" class="job-title" target="_blank">钟山职业技术学院2025年现代家政服务与管理专业教师招聘公告</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏高校）</span>
-                    <span class="date">2025-01-24</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏高校）" data-title="江苏航空职业技术学院2025年公开招聘高层次人才公告">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/289014.html" class="job-title" target="_blank">江苏航空职业技术学院2025年公开招聘高层次人才公告</a>
+            <div class="job-item" data-source="高校人才网（江苏高校）" data-title="南京理工大学2025年诚邀英才依托申报海外优青项目">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/289121.html" class="job-title" target="_blank">南京理工大学2025年诚邀英才依托申报海外优青项目</a>
                 <div class="job-meta">
                     <span class="source">高校人才网（江苏高校）</span>
                     <span class="date">2025-01-24</span>
@@ -316,43 +347,57 @@
                     <span class="date">2025-01-24</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏医学）" data-title="南京市第一医院中心实验室2025年公开招聘博士后">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288774.html" class="job-title" target="_blank">南京市第一医院中心实验室2025年公开招聘博士后</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏医学）</span>
-                    <span class="date">2025-01-23</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏高校）" data-title="南京医科大学2025年诚邀全球英才依托申报海外优青项目">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288899.html" class="job-title" target="_blank">南京医科大学2025年诚邀全球英才依托申报海外优青项目</a>
+            <div class="job-item" data-source="高校人才网（江苏高校）" data-title="钟山职业技术学院2025年现代家政服务与管理专业教师招聘公告">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288984.html" class="job-title" target="_blank">钟山职业技术学院2025年现代家政服务与管理专业教师招聘公告</a>
                 <div class="job-meta">
                     <span class="source">高校人才网（江苏高校）</span>
-                    <span class="date">2025-01-23</span>
+                    <span class="date">2025-01-24</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="常州市滨江中学2025年招聘教师公告">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288636.html" class="job-title" target="_blank">常州市滨江中学2025年招聘教师公告</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏中小学）</span>
-                    <span class="date">2025-01-23</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="无锡市二泉中学2025年1月招聘1名临代教师">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288659.html" class="job-title" target="_blank">无锡市二泉中学2025年1月招聘1名临代教师</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏中小学）</span>
-                    <span class="date">2025-01-23</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="2025年春季博士、博士后人才全国巡回招聘会">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288191.html" class="job-title" target="_blank">2025年春季博士、博士后人才全国巡回招聘会</a>
+            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="江苏省宜兴市宜能实业有限公司2025年1月招聘2名线路设计辅助人员">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288975.html" class="job-title" target="_blank">江苏省宜兴市宜能实业有限公司2025年1月招聘2名线路设计辅助人员</a>
                 <div class="job-meta">
                     <span class="source">高校人才网（江苏企业）</span>
-                    <span class="date">2025-01-23</span>
+                    <span class="date">2025-01-24</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="常州市第五中学2025年诚聘高中英语、高中地理教师">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288772.html" class="job-title" target="_blank">常州市第五中学2025年诚聘高中英语、高中地理教师</a>
+            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="徐州市撷秀中学（徐州一中夹河街校区）2025年公开招聘教师">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/289023.html" class="job-title" target="_blank">徐州市撷秀中学（徐州一中夹河街校区）2025年公开招聘教师</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏中小学）</span>
+                    <span class="date">2025-01-24</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="南京大学医学院附属鼓楼医院脊柱外科2025年面向海内外招聘全职PI和科研型博士后">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/289056.html" class="job-title" target="_blank">南京大学医学院附属鼓楼医院脊柱外科2025年面向海内外招聘全职PI和科研型博士后</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏科研）</span>
+                    <span class="date">2025-01-24</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏机关事业）" data-title="江苏省淮安市医师协会2025年招聘1名工作人员公告">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/289081.html" class="job-title" target="_blank">江苏省淮安市医师协会2025年招聘1名工作人员公告</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏机关事业）</span>
+                    <span class="date">2025-01-24</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="江苏省淮安经济技术开发区空港卓文高级中学2025年秋季招聘储备教师公告">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288993.html" class="job-title" target="_blank">江苏省淮安经济技术开发区空港卓文高级中学2025年秋季招聘储备教师公告</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏中小学）</span>
+                    <span class="date">2025-01-24</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏高校）" data-title="江苏航空职业技术学院2025年公开招聘高层次人才公告">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/289014.html" class="job-title" target="_blank">江苏航空职业技术学院2025年公开招聘高层次人才公告</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏高校）</span>
+                    <span class="date">2025-01-24</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="江苏省涟水金城外国语学校2025年招聘初中教师启事">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288905.html" class="job-title" target="_blank">江苏省涟水金城外国语学校2025年招聘初中教师启事</a>
                 <div class="job-meta">
                     <span class="source">高校人才网（江苏中小学）</span>
                     <span class="date">2025-01-23</span>
@@ -365,8 +410,43 @@
                     <span class="date">2025-01-23</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="中国科学技术大学苏州高等研究院公共实验平台2025年1月招聘1名生物医药工程师启事">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288746.html" class="job-title" target="_blank">中国科学技术大学苏州高等研究院公共实验平台2025年1月招聘1名生物医药工程师启事</a>
+            <div class="job-item" data-source="高校人才网（江苏高校）" data-title="急聘，苏州健雄职业技术学院2025年博士高层次人才需求公告">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/259835.html" class="job-title" target="_blank">急聘，苏州健雄职业技术学院2025年博士高层次人才需求公告</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏高校）</span>
+                    <span class="date">2025-01-23</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏高校）" data-title="南京医科大学2025年诚邀全球英才依托申报海外优青项目">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288899.html" class="job-title" target="_blank">南京医科大学2025年诚邀全球英才依托申报海外优青项目</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏高校）</span>
+                    <span class="date">2025-01-23</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="2025年春季博士、博士后人才全国巡回招聘会">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288191.html" class="job-title" target="_blank">2025年春季博士、博士后人才全国巡回招聘会</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏企业）</span>
+                    <span class="date">2025-01-23</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="常州市滨江中学2025年招聘教师公告">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288636.html" class="job-title" target="_blank">常州市滨江中学2025年招聘教师公告</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏中小学）</span>
+                    <span class="date">2025-01-23</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏医学）" data-title="南京市第一医院中心实验室2025年公开招聘博士后">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288774.html" class="job-title" target="_blank">南京市第一医院中心实验室2025年公开招聘博士后</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏医学）</span>
+                    <span class="date">2025-01-23</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="中国矿业大学科研团队、课题组2025年1月招聘科研助理临时岗位人员通知（第一批）">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288795.html" class="job-title" target="_blank">中国矿业大学科研团队、课题组2025年1月招聘科研助理临时岗位人员通知（第一批）</a>
                 <div class="job-meta">
                     <span class="source">高校人才网（江苏科研）</span>
                     <span class="date">2025-01-23</span>
@@ -379,60 +459,25 @@
                     <span class="date">2025-01-23</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="江苏省涟水金城外国语学校2025年招聘初中教师启事">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288905.html" class="job-title" target="_blank">江苏省涟水金城外国语学校2025年招聘初中教师启事</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏中小学）</span>
-                    <span class="date">2025-01-23</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="中国矿业大学科研团队、课题组2025年1月招聘科研助理临时岗位人员通知（第一批）">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288795.html" class="job-title" target="_blank">中国矿业大学科研团队、课题组2025年1月招聘科研助理临时岗位人员通知（第一批）</a>
+            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="中国科学技术大学苏州高等研究院公共实验平台2025年1月招聘1名生物医药工程师启事">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288746.html" class="job-title" target="_blank">中国科学技术大学苏州高等研究院公共实验平台2025年1月招聘1名生物医药工程师启事</a>
                 <div class="job-meta">
                     <span class="source">高校人才网（江苏科研）</span>
                     <span class="date">2025-01-23</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏高校）" data-title="急聘，苏州健雄职业技术学院2025年博士高层次人才需求公告">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/259835.html" class="job-title" target="_blank">急聘，苏州健雄职业技术学院2025年博士高层次人才需求公告</a>
+            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="常州市第五中学2025年诚聘高中英语、高中地理教师">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288772.html" class="job-title" target="_blank">常州市第五中学2025年诚聘高中英语、高中地理教师</a>
                 <div class="job-meta">
-                    <span class="source">高校人才网（江苏高校）</span>
+                    <span class="source">高校人才网（江苏中小学）</span>
                     <span class="date">2025-01-23</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="江苏省连云港市交通控股集团有限公司2025年招聘62名工作人员简章">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288081.html" class="job-title" target="_blank">江苏省连云港市交通控股集团有限公司2025年招聘62名工作人员简章</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏企业）</span>
-                    <span class="date">2025-01-22</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="江苏省昆山鹿城村镇银行2025年社会招聘启事">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288440.html" class="job-title" target="_blank">江苏省昆山鹿城村镇银行2025年社会招聘启事</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏企业）</span>
-                    <span class="date">2025-01-22</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏机关事业）" data-title="苏州市卫生健康委员会直属事业单位2025年公开招聘50名卫生专业技术人员公告">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288248.html" class="job-title" target="_blank">苏州市卫生健康委员会直属事业单位2025年公开招聘50名卫生专业技术人员公告</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏机关事业）</span>
-                    <span class="date">2025-01-22</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="江苏省昆山鹿城村镇银行研究生工作站2025年招聘启事">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288378.html" class="job-title" target="_blank">江苏省昆山鹿城村镇银行研究生工作站2025年招聘启事</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏企业）</span>
-                    <span class="date">2025-01-22</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="无锡市安镇中学2025年招聘道德与法治代课教师">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288397.html" class="job-title" target="_blank">无锡市安镇中学2025年招聘道德与法治代课教师</a>
+            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="无锡市二泉中学2025年1月招聘1名临代教师">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288659.html" class="job-title" target="_blank">无锡市二泉中学2025年1月招聘1名临代教师</a>
                 <div class="job-meta">
                     <span class="source">高校人才网（江苏中小学）</span>
-                    <span class="date">2025-01-22</span>
+                    <span class="date">2025-01-23</span>
                 </div>
             </div>
             <div class="job-item" data-source="高校人才网（江苏企业）" data-title="江苏省常熟富盈置业有限公司2025年公开招聘1名工作人员简章">
@@ -449,22 +494,15 @@
                     <span class="date">2025-01-22</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="苏州高新区教育系统2025年公开招聘210名事业编制教师公告">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288354.html" class="job-title" target="_blank">苏州高新区教育系统2025年公开招聘210名事业编制教师公告</a>
+            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="江苏省金陵华兴实验学校2025年公开招聘2名编外教师公告">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288286.html" class="job-title" target="_blank">江苏省金陵华兴实验学校2025年公开招聘2名编外教师公告</a>
                 <div class="job-meta">
                     <span class="source">高校人才网（江苏中小学）</span>
                     <span class="date">2025-01-22</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="江苏省南通建交建筑工程有限公司2025年常态化公开招聘9名工作人员简章">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288079.html" class="job-title" target="_blank">江苏省南通建交建筑工程有限公司2025年常态化公开招聘9名工作人员简章</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏企业）</span>
-                    <span class="date">2025-01-22</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="浙商财产保险股份有限公司2025年招聘6名工作人员公告">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288076.html" class="job-title" target="_blank">浙商财产保险股份有限公司2025年招聘6名工作人员公告</a>
+            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="江苏省昆山鹿城村镇银行研究生工作站2025年招聘启事">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288378.html" class="job-title" target="_blank">江苏省昆山鹿城村镇银行研究生工作站2025年招聘启事</a>
                 <div class="job-meta">
                     <span class="source">高校人才网（江苏企业）</span>
                     <span class="date">2025-01-22</span>
@@ -477,6 +515,27 @@
                     <span class="date">2025-01-22</span>
                 </div>
             </div>
+            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="江苏省南通建交建筑工程有限公司2025年常态化公开招聘9名工作人员简章">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288079.html" class="job-title" target="_blank">江苏省南通建交建筑工程有限公司2025年常态化公开招聘9名工作人员简章</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏企业）</span>
+                    <span class="date">2025-01-22</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="江苏省昆山鹿城村镇银行2025年社会招聘启事">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288440.html" class="job-title" target="_blank">江苏省昆山鹿城村镇银行2025年社会招聘启事</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏企业）</span>
+                    <span class="date">2025-01-22</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="苏州高新区教育系统2025年公开招聘210名事业编制教师公告">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288354.html" class="job-title" target="_blank">苏州高新区教育系统2025年公开招聘210名事业编制教师公告</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏中小学）</span>
+                    <span class="date">2025-01-22</span>
+                </div>
+            </div>
             <div class="job-item" data-source="高校人才网（江苏科研）" data-title="中国科学技术大学苏州高等研究院杨亮课题组2025年招收生物医疗微纳系统(BioMEMS)方向特任副研究员/博士后">
                 <a href="https://www.gaoxiaojob.com/announcement/detail/288364.html" class="job-title" target="_blank">中国科学技术大学苏州高等研究院杨亮课题组2025年招收生物医疗微纳系统(BioMEMS)方向特任副研究员/博士后</a>
                 <div class="job-meta">
@@ -484,18 +543,32 @@
                     <span class="date">2025-01-22</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="南京医科大学2025年1月公开招聘人员公告">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/287979.html" class="job-title" target="_blank">南京医科大学2025年1月公开招聘人员公告</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏科研）</span>
-                    <span class="date">2025-01-21</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="江苏省南通市鑫汇控股集团有限公司所属子公司2025年1月公开招聘6名工作人员简章">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288033.html" class="job-title" target="_blank">江苏省南通市鑫汇控股集团有限公司所属子公司2025年1月公开招聘6名工作人员简章</a>
+            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="浙商财产保险股份有限公司2025年招聘6名工作人员公告">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288076.html" class="job-title" target="_blank">浙商财产保险股份有限公司2025年招聘6名工作人员公告</a>
                 <div class="job-meta">
                     <span class="source">高校人才网（江苏企业）</span>
-                    <span class="date">2025-01-21</span>
+                    <span class="date">2025-01-22</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="无锡市安镇中学2025年招聘道德与法治代课教师">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288397.html" class="job-title" target="_blank">无锡市安镇中学2025年招聘道德与法治代课教师</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏中小学）</span>
+                    <span class="date">2025-01-22</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="江苏省连云港市交通控股集团有限公司2025年招聘62名工作人员简章">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288081.html" class="job-title" target="_blank">江苏省连云港市交通控股集团有限公司2025年招聘62名工作人员简章</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏企业）</span>
+                    <span class="date">2025-01-22</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏机关事业）" data-title="苏州市卫生健康委员会直属事业单位2025年公开招聘50名卫生专业技术人员公告">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288248.html" class="job-title" target="_blank">苏州市卫生健康委员会直属事业单位2025年公开招聘50名卫生专业技术人员公告</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏机关事业）</span>
+                    <span class="date">2025-01-22</span>
                 </div>
             </div>
             <div class="job-item" data-source="高校人才网（江苏机关事业）" data-title="南京市江北新区2025年第一批公开招聘10名骨干教师公告">
@@ -526,32 +599,18 @@
                     <span class="date">2025-01-21</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="江苏省卫生健康委员会所属事业单位2025年长期公开招聘工作人员公告">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/287416.html" class="job-title" target="_blank">江苏省卫生健康委员会所属事业单位2025年长期公开招聘工作人员公告</a>
+            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="江苏省南通市鑫汇控股集团有限公司所属子公司2025年1月公开招聘6名工作人员简章">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288033.html" class="job-title" target="_blank">江苏省南通市鑫汇控股集团有限公司所属子公司2025年1月公开招聘6名工作人员简章</a>
                 <div class="job-meta">
-                    <span class="source">高校人才网（江苏科研）</span>
-                    <span class="date">2025-01-20</span>
+                    <span class="source">高校人才网（江苏企业）</span>
+                    <span class="date">2025-01-21</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="南京医科大学2025年招聘具有博士后经历的事业编制工作人员公告（第一批）">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/287471.html" class="job-title" target="_blank">南京医科大学2025年招聘具有博士后经历的事业编制工作人员公告（第一批）</a>
+            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="南京医科大学2025年1月公开招聘人员公告">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/287979.html" class="job-title" target="_blank">南京医科大学2025年1月公开招聘人员公告</a>
                 <div class="job-meta">
                     <span class="source">高校人才网（江苏科研）</span>
-                    <span class="date">2025-01-20</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏机关事业）" data-title="江苏省连云港市赣榆区区属国企2025年对外公开招聘79名工作人员公告">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/287335.html" class="job-title" target="_blank">江苏省连云港市赣榆区区属国企2025年对外公开招聘79名工作人员公告</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏机关事业）</span>
-                    <span class="date">2025-01-20</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="苏州实验室人教管理与服务部2025年招聘启事">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/287276.html" class="job-title" target="_blank">苏州实验室人教管理与服务部2025年招聘启事</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏科研）</span>
-                    <span class="date">2025-01-20</span>
+                    <span class="date">2025-01-21</span>
                 </div>
             </div>
             <div class="job-item" data-source="高校人才网（江苏企业）" data-title="中国振华（集团）新云电子元器件有限责任公司2025年校园招聘">
@@ -575,6 +634,41 @@
                     <span class="date">2025-01-20</span>
                 </div>
             </div>
+            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="苏州实验室人教管理与服务部2025年招聘启事">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/287276.html" class="job-title" target="_blank">苏州实验室人教管理与服务部2025年招聘启事</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏科研）</span>
+                    <span class="date">2025-01-20</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="南京医科大学2025年招聘具有博士后经历的事业编制工作人员公告（第一批）">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/287471.html" class="job-title" target="_blank">南京医科大学2025年招聘具有博士后经历的事业编制工作人员公告（第一批）</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏科研）</span>
+                    <span class="date">2025-01-20</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏机关事业）" data-title="江苏省连云港市赣榆区区属国企2025年对外公开招聘79名工作人员公告">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/287335.html" class="job-title" target="_blank">江苏省连云港市赣榆区区属国企2025年对外公开招聘79名工作人员公告</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏机关事业）</span>
+                    <span class="date">2025-01-20</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="江苏省卫生健康委员会所属事业单位2025年长期公开招聘工作人员公告">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/287416.html" class="job-title" target="_blank">江苏省卫生健康委员会所属事业单位2025年长期公开招聘工作人员公告</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏科研）</span>
+                    <span class="date">2025-01-20</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="中国科学院紫金山天文台2025年公开招用1名硬件测试开发岗位人员的启事（第1期）">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/287256.html" class="job-title" target="_blank">中国科学院紫金山天文台2025年公开招用1名硬件测试开发岗位人员的启事（第1期）</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏科研）</span>
+                    <span class="date">2025-01-17</span>
+                </div>
+            </div>
             <div class="job-item" data-source="高校人才网（江苏医学）" data-title="中国药科大学基建后勤处综合门诊部2025年1月招聘2名医务人员启事">
                 <a href="https://www.gaoxiaojob.com/announcement/detail/287224.html" class="job-title" target="_blank">中国药科大学基建后勤处综合门诊部2025年1月招聘2名医务人员启事</a>
                 <div class="job-meta">
@@ -589,10 +683,10 @@
                     <span class="date">2025-01-17</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="中国科学院紫金山天文台2025年公开招用1名硬件测试开发岗位人员的启事（第1期）">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/287256.html" class="job-title" target="_blank">中国科学院紫金山天文台2025年公开招用1名硬件测试开发岗位人员的启事（第1期）</a>
+            <div class="job-item" data-source="高校人才网（江苏医学）" data-title="江苏省淮安市第一人民医院国家级博士后科研工作站2025年招聘信息">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/286937.html" class="job-title" target="_blank">江苏省淮安市第一人民医院国家级博士后科研工作站2025年招聘信息</a>
                 <div class="job-meta">
-                    <span class="source">高校人才网（江苏科研）</span>
+                    <span class="source">高校人才网（江苏医学）</span>
                     <span class="date">2025-01-17</span>
                 </div>
             </div>
@@ -603,22 +697,15 @@
                     <span class="date">2025-01-17</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏医学）" data-title="江苏省淮安市第一人民医院国家级博士后科研工作站2025年招聘信息">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/286937.html" class="job-title" target="_blank">江苏省淮安市第一人民医院国家级博士后科研工作站2025年招聘信息</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏医学）</span>
-                    <span class="date">2025-01-17</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏医学）" data-title="南京鼓楼医院人力资源服务中心2025年第一批招聘工作人员公告">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/286869.html" class="job-title" target="_blank">南京鼓楼医院人力资源服务中心2025年第一批招聘工作人员公告</a>
+            <div class="job-item" data-source="高校人才网（江苏医学）" data-title="江苏省镇江市第四人民医院2025年招聘30名编外专业技术人员（第一批）公告">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/286495.html" class="job-title" target="_blank">江苏省镇江市第四人民医院2025年招聘30名编外专业技术人员（第一批）公告</a>
                 <div class="job-meta">
                     <span class="source">高校人才网（江苏医学）</span>
                     <span class="date">2025-01-16</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏医学）" data-title="江苏省镇江市第四人民医院2025年招聘30名编外专业技术人员（第一批）公告">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/286495.html" class="job-title" target="_blank">江苏省镇江市第四人民医院2025年招聘30名编外专业技术人员（第一批）公告</a>
+            <div class="job-item" data-source="高校人才网（江苏医学）" data-title="南京鼓楼医院人力资源服务中心2025年第一批招聘工作人员公告">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/286869.html" class="job-title" target="_blank">南京鼓楼医院人力资源服务中心2025年第一批招聘工作人员公告</a>
                 <div class="job-meta">
                     <span class="source">高校人才网（江苏医学）</span>
                     <span class="date">2025-01-16</span>
@@ -708,20 +795,6 @@
                     <span class="date">2024-12-20</span>
                 </div>
             </div>
-            <div class="job-item" data-source="南京市教育局(教师招聘)" data-title="南京市高淳区2025年公开招聘教师公告">
-                <a href="https://edu.nanjing.gov.cn/bsfw/zpzk/202412/t20241218_5035350.html" class="job-title" target="_blank">南京市高淳区2025年公开招聘教师公告</a>
-                <div class="job-meta">
-                    <span class="source">南京市教育局(教师招聘)</span>
-                    <span class="date">2024-12-18</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="南京市教育局(教师招聘)" data-title="南京市浦口区教育局所属部分事业单位2025年公开招聘教师公告">
-                <a href="https://edu.nanjing.gov.cn/bsfw/zpzk/202412/t20241218_5035173.html" class="job-title" target="_blank">南京市浦口区教育局所属部分事业单位2025年公开招聘教师公告</a>
-                <div class="job-meta">
-                    <span class="source">南京市教育局(教师招聘)</span>
-                    <span class="date">2024-12-18</span>
-                </div>
-            </div>
             <div class="job-item" data-source="南京市教育局(教师招聘)" data-title="南京江北新区2025年公开招聘教师公告">
                 <a href="https://edu.nanjing.gov.cn/bsfw/zpzk/202412/t20241218_5035494.html" class="job-title" target="_blank">南京江北新区2025年公开招聘教师公告</a>
                 <div class="job-meta">
@@ -736,6 +809,27 @@
                     <span class="date">2024-12-18</span>
                 </div>
             </div>
+            <div class="job-item" data-source="南京市教育局(教师招聘)" data-title="南京市浦口区教育局所属部分事业单位2025年公开招聘教师公告">
+                <a href="https://edu.nanjing.gov.cn/bsfw/zpzk/202412/t20241218_5035173.html" class="job-title" target="_blank">南京市浦口区教育局所属部分事业单位2025年公开招聘教师公告</a>
+                <div class="job-meta">
+                    <span class="source">南京市教育局(教师招聘)</span>
+                    <span class="date">2024-12-18</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="南京市教育局(教师招聘)" data-title="南京市高淳区2025年公开招聘教师公告">
+                <a href="https://edu.nanjing.gov.cn/bsfw/zpzk/202412/t20241218_5035350.html" class="job-title" target="_blank">南京市高淳区2025年公开招聘教师公告</a>
+                <div class="job-meta">
+                    <span class="source">南京市教育局(教师招聘)</span>
+                    <span class="date">2024-12-18</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="南京市教育局(教师招聘)" data-title="南京市秦淮区教育局所属学校2025年公开招聘教师公告">
+                <a href="https://edu.nanjing.gov.cn/bsfw/zpzk/202412/t20241217_5034658.html" class="job-title" target="_blank">南京市秦淮区教育局所属学校2025年公开招聘教师公告</a>
+                <div class="job-meta">
+                    <span class="source">南京市教育局(教师招聘)</span>
+                    <span class="date">2024-12-17</span>
+                </div>
+            </div>
             <div class="job-item" data-source="南京市教育局(教师招聘)" data-title="南京市雨花台区教育局所属学校2025年公开招聘教师公告">
                 <a href="https://edu.nanjing.gov.cn/bsfw/zpzk/202412/t20241217_5034667.html" class="job-title" target="_blank">南京市雨花台区教育局所属学校2025年公开招聘教师公告</a>
                 <div class="job-meta">
@@ -745,13 +839,6 @@
             </div>
             <div class="job-item" data-source="南京市教育局(教师招聘)" data-title="2025年南京市栖霞区公开招聘教师公告">
                 <a href="https://edu.nanjing.gov.cn/bsfw/zpzk/202412/t20241217_5034653.html" class="job-title" target="_blank">2025年南京市栖霞区公开招聘教师公告</a>
-                <div class="job-meta">
-                    <span class="source">南京市教育局(教师招聘)</span>
-                    <span class="date">2024-12-17</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="南京市教育局(教师招聘)" data-title="南京市秦淮区教育局所属学校2025年公开招聘教师公告">
-                <a href="https://edu.nanjing.gov.cn/bsfw/zpzk/202412/t20241217_5034658.html" class="job-title" target="_blank">南京市秦淮区教育局所属学校2025年公开招聘教师公告</a>
                 <div class="job-meta">
                     <span class="source">南京市教育局(教师招聘)</span>
                     <span class="date">2024-12-17</span>
@@ -848,13 +935,6 @@
                     <span class="date">2024-10-08</span>
                 </div>
             </div>
-            <div class="job-item" data-source="江苏人事人才公共服务网（民办）" data-title="南京审计大学金审学院公开招聘人员公告">
-                <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/29/art_57212_11373805.html" class="job-title" target="_blank">南京审计大学金审学院公开招聘人员公告</a>
-                <div class="job-meta">
-                    <span class="source">江苏人事人才公共服务网（民办）</span>
-                    <span class="date">2024-09-29</span>
-                </div>
-            </div>
             <div class="job-item" data-source="江苏人事人才公共服务网（事业）" data-title="三江学院公开招聘人员公告">
                 <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/29/art_57210_11373809.html" class="job-title" target="_blank">三江学院公开招聘人员公告</a>
                 <div class="job-meta">
@@ -862,17 +942,24 @@
                     <span class="date">2024-09-29</span>
                 </div>
             </div>
-            <div class="job-item" data-source="江苏人事人才公共服务网（企业）" data-title="江苏粮食科技创新研究院公开招聘人员公告">
-                <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/24/art_57211_11368626.html" class="job-title" target="_blank">江苏粮食科技创新研究院公开招聘人员公告</a>
+            <div class="job-item" data-source="江苏人事人才公共服务网（民办）" data-title="南京审计大学金审学院公开招聘人员公告">
+                <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/29/art_57212_11373805.html" class="job-title" target="_blank">南京审计大学金审学院公开招聘人员公告</a>
                 <div class="job-meta">
-                    <span class="source">江苏人事人才公共服务网（企业）</span>
-                    <span class="date">2024-09-24</span>
+                    <span class="source">江苏人事人才公共服务网（民办）</span>
+                    <span class="date">2024-09-29</span>
                 </div>
             </div>
             <div class="job-item" data-source="江苏人事人才公共服务网（事业）" data-title="南京工业大学公开招聘人员公告">
                 <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/24/art_57210_11368623.html" class="job-title" target="_blank">南京工业大学公开招聘人员公告</a>
                 <div class="job-meta">
                     <span class="source">江苏人事人才公共服务网（事业）</span>
+                    <span class="date">2024-09-24</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="江苏人事人才公共服务网（企业）" data-title="江苏粮食科技创新研究院公开招聘人员公告">
+                <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/24/art_57211_11368626.html" class="job-title" target="_blank">江苏粮食科技创新研究院公开招聘人员公告</a>
+                <div class="job-meta">
+                    <span class="source">江苏人事人才公共服务网（企业）</span>
                     <span class="date">2024-09-24</span>
                 </div>
             </div>
@@ -890,22 +977,15 @@
                     <span class="date">2024-09-18</span>
                 </div>
             </div>
-            <div class="job-item" data-source="江苏人事人才公共服务网（民办）" data-title="金肯职业技术学院公开招聘人员公告">
-                <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/14/art_57212_11362094.html" class="job-title" target="_blank">金肯职业技术学院公开招聘人员公告</a>
-                <div class="job-meta">
-                    <span class="source">江苏人事人才公共服务网（民办）</span>
-                    <span class="date">2024-09-14</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="江苏人事人才公共服务网（事业）" data-title="江苏省体育局水上运动管理中心公开招聘人员公告">
-                <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/14/art_57210_11362088.html" class="job-title" target="_blank">江苏省体育局水上运动管理中心公开招聘人员公告</a>
+            <div class="job-item" data-source="江苏人事人才公共服务网（事业）" data-title="南京水利科学研究院公开招聘人员公告">
+                <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/14/art_57210_11361334.html" class="job-title" target="_blank">南京水利科学研究院公开招聘人员公告</a>
                 <div class="job-meta">
                     <span class="source">江苏人事人才公共服务网（事业）</span>
                     <span class="date">2024-09-14</span>
                 </div>
             </div>
-            <div class="job-item" data-source="江苏人事人才公共服务网（事业）" data-title="南京水利科学研究院公开招聘人员公告">
-                <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/14/art_57210_11361334.html" class="job-title" target="_blank">南京水利科学研究院公开招聘人员公告</a>
+            <div class="job-item" data-source="江苏人事人才公共服务网（事业）" data-title="江苏省体育局水上运动管理中心公开招聘人员公告">
+                <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/14/art_57210_11362088.html" class="job-title" target="_blank">江苏省体育局水上运动管理中心公开招聘人员公告</a>
                 <div class="job-meta">
                     <span class="source">江苏人事人才公共服务网（事业）</span>
                     <span class="date">2024-09-14</span>
@@ -919,14 +999,21 @@
                 </div>
             </div>
             <div class="job-item" data-source="江苏人事人才公共服务网（民办）" data-title="金肯职业技术学院公开招聘人员公告">
-                <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/5/art_57212_11345348.html" class="job-title" target="_blank">金肯职业技术学院公开招聘人员公告</a>
+                <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/14/art_57212_11362094.html" class="job-title" target="_blank">金肯职业技术学院公开招聘人员公告</a>
+                <div class="job-meta">
+                    <span class="source">江苏人事人才公共服务网（民办）</span>
+                    <span class="date">2024-09-14</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="江苏人事人才公共服务网（民办）" data-title="正德职业技术学院公开招聘人员公告">
+                <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/5/art_57212_11345562.html" class="job-title" target="_blank">正德职业技术学院公开招聘人员公告</a>
                 <div class="job-meta">
                     <span class="source">江苏人事人才公共服务网（民办）</span>
                     <span class="date">2024-09-05</span>
                 </div>
             </div>
-            <div class="job-item" data-source="江苏人事人才公共服务网（民办）" data-title="正德职业技术学院公开招聘人员公告">
-                <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/5/art_57212_11345562.html" class="job-title" target="_blank">正德职业技术学院公开招聘人员公告</a>
+            <div class="job-item" data-source="江苏人事人才公共服务网（民办）" data-title="金肯职业技术学院公开招聘人员公告">
+                <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/5/art_57212_11345348.html" class="job-title" target="_blank">金肯职业技术学院公开招聘人员公告</a>
                 <div class="job-meta">
                     <span class="source">江苏人事人才公共服务网（民办）</span>
                     <span class="date">2024-09-05</span>
@@ -939,15 +1026,15 @@
                     <span class="date">2024-09-03</span>
                 </div>
             </div>
-            <div class="job-item" data-source="江苏人事人才公共服务网（事业）" data-title="南京水利科学研究院公开招聘人员公告">
-                <a href="http://jshrss.jiangsu.gov.cn/art/2024/8/23/art_57210_11332481.html" class="job-title" target="_blank">南京水利科学研究院公开招聘人员公告</a>
+            <div class="job-item" data-source="江苏人事人才公共服务网（事业）" data-title="三江学院公开招聘人员公告">
+                <a href="http://jshrss.jiangsu.gov.cn/art/2024/8/23/art_57210_11332107.html" class="job-title" target="_blank">三江学院公开招聘人员公告</a>
                 <div class="job-meta">
                     <span class="source">江苏人事人才公共服务网（事业）</span>
                     <span class="date">2024-08-23</span>
                 </div>
             </div>
-            <div class="job-item" data-source="江苏人事人才公共服务网（事业）" data-title="三江学院公开招聘人员公告">
-                <a href="http://jshrss.jiangsu.gov.cn/art/2024/8/23/art_57210_11332107.html" class="job-title" target="_blank">三江学院公开招聘人员公告</a>
+            <div class="job-item" data-source="江苏人事人才公共服务网（事业）" data-title="南京水利科学研究院公开招聘人员公告">
+                <a href="http://jshrss.jiangsu.gov.cn/art/2024/8/23/art_57210_11332481.html" class="job-title" target="_blank">南京水利科学研究院公开招聘人员公告</a>
                 <div class="job-meta">
                     <span class="source">江苏人事人才公共服务网（事业）</span>
                     <span class="date">2024-08-23</span>
@@ -960,17 +1047,17 @@
                     <span class="date">2024-08-19</span>
                 </div>
             </div>
-            <div class="job-item" data-source="江苏人事人才公共服务网（民办）" data-title="金肯职业技术学院公开招聘人员公告">
-                <a href="http://jshrss.jiangsu.gov.cn/art/2024/8/7/art_57212_11318467.html" class="job-title" target="_blank">金肯职业技术学院公开招聘人员公告</a>
-                <div class="job-meta">
-                    <span class="source">江苏人事人才公共服务网（民办）</span>
-                    <span class="date">2024-08-07</span>
-                </div>
-            </div>
             <div class="job-item" data-source="江苏人事人才公共服务网（事业）" data-title="南京水利科学研究院公开招聘人员公告">
                 <a href="http://jshrss.jiangsu.gov.cn/art/2024/8/7/art_57210_11318466.html" class="job-title" target="_blank">南京水利科学研究院公开招聘人员公告</a>
                 <div class="job-meta">
                     <span class="source">江苏人事人才公共服务网（事业）</span>
+                    <span class="date">2024-08-07</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="江苏人事人才公共服务网（民办）" data-title="金肯职业技术学院公开招聘人员公告">
+                <a href="http://jshrss.jiangsu.gov.cn/art/2024/8/7/art_57212_11318467.html" class="job-title" target="_blank">金肯职业技术学院公开招聘人员公告</a>
+                <div class="job-meta">
+                    <span class="source">江苏人事人才公共服务网（民办）</span>
                     <span class="date">2024-08-07</span>
                 </div>
             </div>
@@ -1013,20 +1100,6 @@
                     <span class="date">2025-01-26</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏高校）" data-title="南京理工大学2025年诚邀英才依托申报海外优青项目">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/289121.html" class="job-title" target="_blank">南京理工大学2025年诚邀英才依托申报海外优青项目</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏高校）</span>
-                    <span class="date">2025-01-24</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="南京大学医学院附属鼓楼医院脊柱外科2025年面向海内外招聘全职PI和科研型博士后">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/289056.html" class="job-title" target="_blank">南京大学医学院附属鼓楼医院脊柱外科2025年面向海内外招聘全职PI和科研型博士后</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏科研）</span>
-                    <span class="date">2025-01-24</span>
-                </div>
-            </div>
             <div class="job-item" data-source="高校人才网（江苏高校）" data-title="南京大学国际地学大数据团队2025年招聘4名大数据录入专员">
                 <a href="https://www.gaoxiaojob.com/announcement/detail/289144.html" class="job-title" target="_blank">南京大学国际地学大数据团队2025年招聘4名大数据录入专员</a>
                 <div class="job-meta">
@@ -1034,43 +1107,8 @@
                     <span class="date">2025-01-24</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏机关事业）" data-title="江苏省淮安市医师协会2025年招聘1名工作人员公告">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/289081.html" class="job-title" target="_blank">江苏省淮安市医师协会2025年招聘1名工作人员公告</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏机关事业）</span>
-                    <span class="date">2025-01-24</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="江苏省宜兴市宜能实业有限公司2025年1月招聘2名线路设计辅助人员">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288975.html" class="job-title" target="_blank">江苏省宜兴市宜能实业有限公司2025年1月招聘2名线路设计辅助人员</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏企业）</span>
-                    <span class="date">2025-01-24</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="徐州市撷秀中学（徐州一中夹河街校区）2025年公开招聘教师">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/289023.html" class="job-title" target="_blank">徐州市撷秀中学（徐州一中夹河街校区）2025年公开招聘教师</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏中小学）</span>
-                    <span class="date">2025-01-24</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="江苏省淮安经济技术开发区空港卓文高级中学2025年秋季招聘储备教师公告">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288993.html" class="job-title" target="_blank">江苏省淮安经济技术开发区空港卓文高级中学2025年秋季招聘储备教师公告</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏中小学）</span>
-                    <span class="date">2025-01-24</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏高校）" data-title="钟山职业技术学院2025年现代家政服务与管理专业教师招聘公告">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288984.html" class="job-title" target="_blank">钟山职业技术学院2025年现代家政服务与管理专业教师招聘公告</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏高校）</span>
-                    <span class="date">2025-01-24</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏高校）" data-title="江苏航空职业技术学院2025年公开招聘高层次人才公告">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/289014.html" class="job-title" target="_blank">江苏航空职业技术学院2025年公开招聘高层次人才公告</a>
+            <div class="job-item" data-source="高校人才网（江苏高校）" data-title="南京理工大学2025年诚邀英才依托申报海外优青项目">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/289121.html" class="job-title" target="_blank">南京理工大学2025年诚邀英才依托申报海外优青项目</a>
                 <div class="job-meta">
                     <span class="source">高校人才网（江苏高校）</span>
                     <span class="date">2025-01-24</span>
@@ -1090,43 +1128,57 @@
                     <span class="date">2025-01-24</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏医学）" data-title="南京市第一医院中心实验室2025年公开招聘博士后">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288774.html" class="job-title" target="_blank">南京市第一医院中心实验室2025年公开招聘博士后</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏医学）</span>
-                    <span class="date">2025-01-23</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏高校）" data-title="南京医科大学2025年诚邀全球英才依托申报海外优青项目">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288899.html" class="job-title" target="_blank">南京医科大学2025年诚邀全球英才依托申报海外优青项目</a>
+            <div class="job-item" data-source="高校人才网（江苏高校）" data-title="钟山职业技术学院2025年现代家政服务与管理专业教师招聘公告">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288984.html" class="job-title" target="_blank">钟山职业技术学院2025年现代家政服务与管理专业教师招聘公告</a>
                 <div class="job-meta">
                     <span class="source">高校人才网（江苏高校）</span>
-                    <span class="date">2025-01-23</span>
+                    <span class="date">2025-01-24</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="常州市滨江中学2025年招聘教师公告">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288636.html" class="job-title" target="_blank">常州市滨江中学2025年招聘教师公告</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏中小学）</span>
-                    <span class="date">2025-01-23</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="无锡市二泉中学2025年1月招聘1名临代教师">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288659.html" class="job-title" target="_blank">无锡市二泉中学2025年1月招聘1名临代教师</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏中小学）</span>
-                    <span class="date">2025-01-23</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="2025年春季博士、博士后人才全国巡回招聘会">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288191.html" class="job-title" target="_blank">2025年春季博士、博士后人才全国巡回招聘会</a>
+            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="江苏省宜兴市宜能实业有限公司2025年1月招聘2名线路设计辅助人员">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288975.html" class="job-title" target="_blank">江苏省宜兴市宜能实业有限公司2025年1月招聘2名线路设计辅助人员</a>
                 <div class="job-meta">
                     <span class="source">高校人才网（江苏企业）</span>
-                    <span class="date">2025-01-23</span>
+                    <span class="date">2025-01-24</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="常州市第五中学2025年诚聘高中英语、高中地理教师">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288772.html" class="job-title" target="_blank">常州市第五中学2025年诚聘高中英语、高中地理教师</a>
+            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="徐州市撷秀中学（徐州一中夹河街校区）2025年公开招聘教师">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/289023.html" class="job-title" target="_blank">徐州市撷秀中学（徐州一中夹河街校区）2025年公开招聘教师</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏中小学）</span>
+                    <span class="date">2025-01-24</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="南京大学医学院附属鼓楼医院脊柱外科2025年面向海内外招聘全职PI和科研型博士后">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/289056.html" class="job-title" target="_blank">南京大学医学院附属鼓楼医院脊柱外科2025年面向海内外招聘全职PI和科研型博士后</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏科研）</span>
+                    <span class="date">2025-01-24</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏机关事业）" data-title="江苏省淮安市医师协会2025年招聘1名工作人员公告">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/289081.html" class="job-title" target="_blank">江苏省淮安市医师协会2025年招聘1名工作人员公告</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏机关事业）</span>
+                    <span class="date">2025-01-24</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="江苏省淮安经济技术开发区空港卓文高级中学2025年秋季招聘储备教师公告">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288993.html" class="job-title" target="_blank">江苏省淮安经济技术开发区空港卓文高级中学2025年秋季招聘储备教师公告</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏中小学）</span>
+                    <span class="date">2025-01-24</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏高校）" data-title="江苏航空职业技术学院2025年公开招聘高层次人才公告">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/289014.html" class="job-title" target="_blank">江苏航空职业技术学院2025年公开招聘高层次人才公告</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏高校）</span>
+                    <span class="date">2025-01-24</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="江苏省涟水金城外国语学校2025年招聘初中教师启事">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288905.html" class="job-title" target="_blank">江苏省涟水金城外国语学校2025年招聘初中教师启事</a>
                 <div class="job-meta">
                     <span class="source">高校人才网（江苏中小学）</span>
                     <span class="date">2025-01-23</span>
@@ -1139,8 +1191,43 @@
                     <span class="date">2025-01-23</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="中国科学技术大学苏州高等研究院公共实验平台2025年1月招聘1名生物医药工程师启事">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288746.html" class="job-title" target="_blank">中国科学技术大学苏州高等研究院公共实验平台2025年1月招聘1名生物医药工程师启事</a>
+            <div class="job-item" data-source="高校人才网（江苏高校）" data-title="急聘，苏州健雄职业技术学院2025年博士高层次人才需求公告">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/259835.html" class="job-title" target="_blank">急聘，苏州健雄职业技术学院2025年博士高层次人才需求公告</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏高校）</span>
+                    <span class="date">2025-01-23</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏高校）" data-title="南京医科大学2025年诚邀全球英才依托申报海外优青项目">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288899.html" class="job-title" target="_blank">南京医科大学2025年诚邀全球英才依托申报海外优青项目</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏高校）</span>
+                    <span class="date">2025-01-23</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="2025年春季博士、博士后人才全国巡回招聘会">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288191.html" class="job-title" target="_blank">2025年春季博士、博士后人才全国巡回招聘会</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏企业）</span>
+                    <span class="date">2025-01-23</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="常州市滨江中学2025年招聘教师公告">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288636.html" class="job-title" target="_blank">常州市滨江中学2025年招聘教师公告</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏中小学）</span>
+                    <span class="date">2025-01-23</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏医学）" data-title="南京市第一医院中心实验室2025年公开招聘博士后">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288774.html" class="job-title" target="_blank">南京市第一医院中心实验室2025年公开招聘博士后</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏医学）</span>
+                    <span class="date">2025-01-23</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="中国矿业大学科研团队、课题组2025年1月招聘科研助理临时岗位人员通知（第一批）">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288795.html" class="job-title" target="_blank">中国矿业大学科研团队、课题组2025年1月招聘科研助理临时岗位人员通知（第一批）</a>
                 <div class="job-meta">
                     <span class="source">高校人才网（江苏科研）</span>
                     <span class="date">2025-01-23</span>
@@ -1153,60 +1240,25 @@
                     <span class="date">2025-01-23</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="江苏省涟水金城外国语学校2025年招聘初中教师启事">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288905.html" class="job-title" target="_blank">江苏省涟水金城外国语学校2025年招聘初中教师启事</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏中小学）</span>
-                    <span class="date">2025-01-23</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="中国矿业大学科研团队、课题组2025年1月招聘科研助理临时岗位人员通知（第一批）">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288795.html" class="job-title" target="_blank">中国矿业大学科研团队、课题组2025年1月招聘科研助理临时岗位人员通知（第一批）</a>
+            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="中国科学技术大学苏州高等研究院公共实验平台2025年1月招聘1名生物医药工程师启事">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288746.html" class="job-title" target="_blank">中国科学技术大学苏州高等研究院公共实验平台2025年1月招聘1名生物医药工程师启事</a>
                 <div class="job-meta">
                     <span class="source">高校人才网（江苏科研）</span>
                     <span class="date">2025-01-23</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏高校）" data-title="急聘，苏州健雄职业技术学院2025年博士高层次人才需求公告">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/259835.html" class="job-title" target="_blank">急聘，苏州健雄职业技术学院2025年博士高层次人才需求公告</a>
+            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="常州市第五中学2025年诚聘高中英语、高中地理教师">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288772.html" class="job-title" target="_blank">常州市第五中学2025年诚聘高中英语、高中地理教师</a>
                 <div class="job-meta">
-                    <span class="source">高校人才网（江苏高校）</span>
+                    <span class="source">高校人才网（江苏中小学）</span>
                     <span class="date">2025-01-23</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="江苏省连云港市交通控股集团有限公司2025年招聘62名工作人员简章">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288081.html" class="job-title" target="_blank">江苏省连云港市交通控股集团有限公司2025年招聘62名工作人员简章</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏企业）</span>
-                    <span class="date">2025-01-22</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="江苏省昆山鹿城村镇银行2025年社会招聘启事">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288440.html" class="job-title" target="_blank">江苏省昆山鹿城村镇银行2025年社会招聘启事</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏企业）</span>
-                    <span class="date">2025-01-22</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏机关事业）" data-title="苏州市卫生健康委员会直属事业单位2025年公开招聘50名卫生专业技术人员公告">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288248.html" class="job-title" target="_blank">苏州市卫生健康委员会直属事业单位2025年公开招聘50名卫生专业技术人员公告</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏机关事业）</span>
-                    <span class="date">2025-01-22</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="江苏省昆山鹿城村镇银行研究生工作站2025年招聘启事">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288378.html" class="job-title" target="_blank">江苏省昆山鹿城村镇银行研究生工作站2025年招聘启事</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏企业）</span>
-                    <span class="date">2025-01-22</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="无锡市安镇中学2025年招聘道德与法治代课教师">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288397.html" class="job-title" target="_blank">无锡市安镇中学2025年招聘道德与法治代课教师</a>
+            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="无锡市二泉中学2025年1月招聘1名临代教师">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288659.html" class="job-title" target="_blank">无锡市二泉中学2025年1月招聘1名临代教师</a>
                 <div class="job-meta">
                     <span class="source">高校人才网（江苏中小学）</span>
-                    <span class="date">2025-01-22</span>
+                    <span class="date">2025-01-23</span>
                 </div>
             </div>
             <div class="job-item" data-source="高校人才网（江苏企业）" data-title="江苏省常熟富盈置业有限公司2025年公开招聘1名工作人员简章">
@@ -1223,22 +1275,15 @@
                     <span class="date">2025-01-22</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="苏州高新区教育系统2025年公开招聘210名事业编制教师公告">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288354.html" class="job-title" target="_blank">苏州高新区教育系统2025年公开招聘210名事业编制教师公告</a>
+            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="江苏省金陵华兴实验学校2025年公开招聘2名编外教师公告">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288286.html" class="job-title" target="_blank">江苏省金陵华兴实验学校2025年公开招聘2名编外教师公告</a>
                 <div class="job-meta">
                     <span class="source">高校人才网（江苏中小学）</span>
                     <span class="date">2025-01-22</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="江苏省南通建交建筑工程有限公司2025年常态化公开招聘9名工作人员简章">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288079.html" class="job-title" target="_blank">江苏省南通建交建筑工程有限公司2025年常态化公开招聘9名工作人员简章</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏企业）</span>
-                    <span class="date">2025-01-22</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="浙商财产保险股份有限公司2025年招聘6名工作人员公告">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288076.html" class="job-title" target="_blank">浙商财产保险股份有限公司2025年招聘6名工作人员公告</a>
+            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="江苏省昆山鹿城村镇银行研究生工作站2025年招聘启事">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288378.html" class="job-title" target="_blank">江苏省昆山鹿城村镇银行研究生工作站2025年招聘启事</a>
                 <div class="job-meta">
                     <span class="source">高校人才网（江苏企业）</span>
                     <span class="date">2025-01-22</span>
@@ -1251,6 +1296,27 @@
                     <span class="date">2025-01-22</span>
                 </div>
             </div>
+            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="江苏省南通建交建筑工程有限公司2025年常态化公开招聘9名工作人员简章">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288079.html" class="job-title" target="_blank">江苏省南通建交建筑工程有限公司2025年常态化公开招聘9名工作人员简章</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏企业）</span>
+                    <span class="date">2025-01-22</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="江苏省昆山鹿城村镇银行2025年社会招聘启事">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288440.html" class="job-title" target="_blank">江苏省昆山鹿城村镇银行2025年社会招聘启事</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏企业）</span>
+                    <span class="date">2025-01-22</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="苏州高新区教育系统2025年公开招聘210名事业编制教师公告">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288354.html" class="job-title" target="_blank">苏州高新区教育系统2025年公开招聘210名事业编制教师公告</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏中小学）</span>
+                    <span class="date">2025-01-22</span>
+                </div>
+            </div>
             <div class="job-item" data-source="高校人才网（江苏科研）" data-title="中国科学技术大学苏州高等研究院杨亮课题组2025年招收生物医疗微纳系统(BioMEMS)方向特任副研究员/博士后">
                 <a href="https://www.gaoxiaojob.com/announcement/detail/288364.html" class="job-title" target="_blank">中国科学技术大学苏州高等研究院杨亮课题组2025年招收生物医疗微纳系统(BioMEMS)方向特任副研究员/博士后</a>
                 <div class="job-meta">
@@ -1258,18 +1324,32 @@
                     <span class="date">2025-01-22</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="南京医科大学2025年1月公开招聘人员公告">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/287979.html" class="job-title" target="_blank">南京医科大学2025年1月公开招聘人员公告</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏科研）</span>
-                    <span class="date">2025-01-21</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="江苏省南通市鑫汇控股集团有限公司所属子公司2025年1月公开招聘6名工作人员简章">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/288033.html" class="job-title" target="_blank">江苏省南通市鑫汇控股集团有限公司所属子公司2025年1月公开招聘6名工作人员简章</a>
+            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="浙商财产保险股份有限公司2025年招聘6名工作人员公告">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288076.html" class="job-title" target="_blank">浙商财产保险股份有限公司2025年招聘6名工作人员公告</a>
                 <div class="job-meta">
                     <span class="source">高校人才网（江苏企业）</span>
-                    <span class="date">2025-01-21</span>
+                    <span class="date">2025-01-22</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏中小学）" data-title="无锡市安镇中学2025年招聘道德与法治代课教师">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288397.html" class="job-title" target="_blank">无锡市安镇中学2025年招聘道德与法治代课教师</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏中小学）</span>
+                    <span class="date">2025-01-22</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="江苏省连云港市交通控股集团有限公司2025年招聘62名工作人员简章">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288081.html" class="job-title" target="_blank">江苏省连云港市交通控股集团有限公司2025年招聘62名工作人员简章</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏企业）</span>
+                    <span class="date">2025-01-22</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏机关事业）" data-title="苏州市卫生健康委员会直属事业单位2025年公开招聘50名卫生专业技术人员公告">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288248.html" class="job-title" target="_blank">苏州市卫生健康委员会直属事业单位2025年公开招聘50名卫生专业技术人员公告</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏机关事业）</span>
+                    <span class="date">2025-01-22</span>
                 </div>
             </div>
             <div class="job-item" data-source="高校人才网（江苏机关事业）" data-title="南京市江北新区2025年第一批公开招聘10名骨干教师公告">
@@ -1300,32 +1380,18 @@
                     <span class="date">2025-01-21</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="江苏省卫生健康委员会所属事业单位2025年长期公开招聘工作人员公告">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/287416.html" class="job-title" target="_blank">江苏省卫生健康委员会所属事业单位2025年长期公开招聘工作人员公告</a>
+            <div class="job-item" data-source="高校人才网（江苏企业）" data-title="江苏省南通市鑫汇控股集团有限公司所属子公司2025年1月公开招聘6名工作人员简章">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/288033.html" class="job-title" target="_blank">江苏省南通市鑫汇控股集团有限公司所属子公司2025年1月公开招聘6名工作人员简章</a>
                 <div class="job-meta">
-                    <span class="source">高校人才网（江苏科研）</span>
-                    <span class="date">2025-01-20</span>
+                    <span class="source">高校人才网（江苏企业）</span>
+                    <span class="date">2025-01-21</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="南京医科大学2025年招聘具有博士后经历的事业编制工作人员公告（第一批）">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/287471.html" class="job-title" target="_blank">南京医科大学2025年招聘具有博士后经历的事业编制工作人员公告（第一批）</a>
+            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="南京医科大学2025年1月公开招聘人员公告">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/287979.html" class="job-title" target="_blank">南京医科大学2025年1月公开招聘人员公告</a>
                 <div class="job-meta">
                     <span class="source">高校人才网（江苏科研）</span>
-                    <span class="date">2025-01-20</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏机关事业）" data-title="江苏省连云港市赣榆区区属国企2025年对外公开招聘79名工作人员公告">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/287335.html" class="job-title" target="_blank">江苏省连云港市赣榆区区属国企2025年对外公开招聘79名工作人员公告</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏机关事业）</span>
-                    <span class="date">2025-01-20</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="苏州实验室人教管理与服务部2025年招聘启事">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/287276.html" class="job-title" target="_blank">苏州实验室人教管理与服务部2025年招聘启事</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏科研）</span>
-                    <span class="date">2025-01-20</span>
+                    <span class="date">2025-01-21</span>
                 </div>
             </div>
             <div class="job-item" data-source="高校人才网（江苏企业）" data-title="中国振华（集团）新云电子元器件有限责任公司2025年校园招聘">
@@ -1349,6 +1415,41 @@
                     <span class="date">2025-01-20</span>
                 </div>
             </div>
+            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="苏州实验室人教管理与服务部2025年招聘启事">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/287276.html" class="job-title" target="_blank">苏州实验室人教管理与服务部2025年招聘启事</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏科研）</span>
+                    <span class="date">2025-01-20</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="南京医科大学2025年招聘具有博士后经历的事业编制工作人员公告（第一批）">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/287471.html" class="job-title" target="_blank">南京医科大学2025年招聘具有博士后经历的事业编制工作人员公告（第一批）</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏科研）</span>
+                    <span class="date">2025-01-20</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏机关事业）" data-title="江苏省连云港市赣榆区区属国企2025年对外公开招聘79名工作人员公告">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/287335.html" class="job-title" target="_blank">江苏省连云港市赣榆区区属国企2025年对外公开招聘79名工作人员公告</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏机关事业）</span>
+                    <span class="date">2025-01-20</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="江苏省卫生健康委员会所属事业单位2025年长期公开招聘工作人员公告">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/287416.html" class="job-title" target="_blank">江苏省卫生健康委员会所属事业单位2025年长期公开招聘工作人员公告</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏科研）</span>
+                    <span class="date">2025-01-20</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="中国科学院紫金山天文台2025年公开招用1名硬件测试开发岗位人员的启事（第1期）">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/287256.html" class="job-title" target="_blank">中国科学院紫金山天文台2025年公开招用1名硬件测试开发岗位人员的启事（第1期）</a>
+                <div class="job-meta">
+                    <span class="source">高校人才网（江苏科研）</span>
+                    <span class="date">2025-01-17</span>
+                </div>
+            </div>
             <div class="job-item" data-source="高校人才网（江苏医学）" data-title="中国药科大学基建后勤处综合门诊部2025年1月招聘2名医务人员启事">
                 <a href="https://www.gaoxiaojob.com/announcement/detail/287224.html" class="job-title" target="_blank">中国药科大学基建后勤处综合门诊部2025年1月招聘2名医务人员启事</a>
                 <div class="job-meta">
@@ -1363,10 +1464,10 @@
                     <span class="date">2025-01-17</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏科研）" data-title="中国科学院紫金山天文台2025年公开招用1名硬件测试开发岗位人员的启事（第1期）">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/287256.html" class="job-title" target="_blank">中国科学院紫金山天文台2025年公开招用1名硬件测试开发岗位人员的启事（第1期）</a>
+            <div class="job-item" data-source="高校人才网（江苏医学）" data-title="江苏省淮安市第一人民医院国家级博士后科研工作站2025年招聘信息">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/286937.html" class="job-title" target="_blank">江苏省淮安市第一人民医院国家级博士后科研工作站2025年招聘信息</a>
                 <div class="job-meta">
-                    <span class="source">高校人才网（江苏科研）</span>
+                    <span class="source">高校人才网（江苏医学）</span>
                     <span class="date">2025-01-17</span>
                 </div>
             </div>
@@ -1377,22 +1478,15 @@
                     <span class="date">2025-01-17</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏医学）" data-title="江苏省淮安市第一人民医院国家级博士后科研工作站2025年招聘信息">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/286937.html" class="job-title" target="_blank">江苏省淮安市第一人民医院国家级博士后科研工作站2025年招聘信息</a>
-                <div class="job-meta">
-                    <span class="source">高校人才网（江苏医学）</span>
-                    <span class="date">2025-01-17</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="高校人才网（江苏医学）" data-title="南京鼓楼医院人力资源服务中心2025年第一批招聘工作人员公告">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/286869.html" class="job-title" target="_blank">南京鼓楼医院人力资源服务中心2025年第一批招聘工作人员公告</a>
+            <div class="job-item" data-source="高校人才网（江苏医学）" data-title="江苏省镇江市第四人民医院2025年招聘30名编外专业技术人员（第一批）公告">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/286495.html" class="job-title" target="_blank">江苏省镇江市第四人民医院2025年招聘30名编外专业技术人员（第一批）公告</a>
                 <div class="job-meta">
                     <span class="source">高校人才网（江苏医学）</span>
                     <span class="date">2025-01-16</span>
                 </div>
             </div>
-            <div class="job-item" data-source="高校人才网（江苏医学）" data-title="江苏省镇江市第四人民医院2025年招聘30名编外专业技术人员（第一批）公告">
-                <a href="https://www.gaoxiaojob.com/announcement/detail/286495.html" class="job-title" target="_blank">江苏省镇江市第四人民医院2025年招聘30名编外专业技术人员（第一批）公告</a>
+            <div class="job-item" data-source="高校人才网（江苏医学）" data-title="南京鼓楼医院人力资源服务中心2025年第一批招聘工作人员公告">
+                <a href="https://www.gaoxiaojob.com/announcement/detail/286869.html" class="job-title" target="_blank">南京鼓楼医院人力资源服务中心2025年第一批招聘工作人员公告</a>
                 <div class="job-meta">
                     <span class="source">高校人才网（江苏医学）</span>
                     <span class="date">2025-01-16</span>
@@ -1486,20 +1580,6 @@
                     <span class="date">2024-12-20</span>
                 </div>
             </div>
-            <div class="job-item" data-source="南京市教育局(教师招聘)" data-title="南京市高淳区2025年公开招聘教师公告">
-                <a href="https://edu.nanjing.gov.cn/bsfw/zpzk/202412/t20241218_5035350.html" class="job-title" target="_blank">南京市高淳区2025年公开招聘教师公告</a>
-                <div class="job-meta">
-                    <span class="source">南京市教育局(教师招聘)</span>
-                    <span class="date">2024-12-18</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="南京市教育局(教师招聘)" data-title="南京市浦口区教育局所属部分事业单位2025年公开招聘教师公告">
-                <a href="https://edu.nanjing.gov.cn/bsfw/zpzk/202412/t20241218_5035173.html" class="job-title" target="_blank">南京市浦口区教育局所属部分事业单位2025年公开招聘教师公告</a>
-                <div class="job-meta">
-                    <span class="source">南京市教育局(教师招聘)</span>
-                    <span class="date">2024-12-18</span>
-                </div>
-            </div>
             <div class="job-item" data-source="南京市教育局(教师招聘)" data-title="南京江北新区2025年公开招聘教师公告">
                 <a href="https://edu.nanjing.gov.cn/bsfw/zpzk/202412/t20241218_5035494.html" class="job-title" target="_blank">南京江北新区2025年公开招聘教师公告</a>
                 <div class="job-meta">
@@ -1514,6 +1594,27 @@
                     <span class="date">2024-12-18</span>
                 </div>
             </div>
+            <div class="job-item" data-source="南京市教育局(教师招聘)" data-title="南京市浦口区教育局所属部分事业单位2025年公开招聘教师公告">
+                <a href="https://edu.nanjing.gov.cn/bsfw/zpzk/202412/t20241218_5035173.html" class="job-title" target="_blank">南京市浦口区教育局所属部分事业单位2025年公开招聘教师公告</a>
+                <div class="job-meta">
+                    <span class="source">南京市教育局(教师招聘)</span>
+                    <span class="date">2024-12-18</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="南京市教育局(教师招聘)" data-title="南京市高淳区2025年公开招聘教师公告">
+                <a href="https://edu.nanjing.gov.cn/bsfw/zpzk/202412/t20241218_5035350.html" class="job-title" target="_blank">南京市高淳区2025年公开招聘教师公告</a>
+                <div class="job-meta">
+                    <span class="source">南京市教育局(教师招聘)</span>
+                    <span class="date">2024-12-18</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="南京市教育局(教师招聘)" data-title="南京市秦淮区教育局所属学校2025年公开招聘教师公告">
+                <a href="https://edu.nanjing.gov.cn/bsfw/zpzk/202412/t20241217_5034658.html" class="job-title" target="_blank">南京市秦淮区教育局所属学校2025年公开招聘教师公告</a>
+                <div class="job-meta">
+                    <span class="source">南京市教育局(教师招聘)</span>
+                    <span class="date">2024-12-17</span>
+                </div>
+            </div>
             <div class="job-item" data-source="南京市教育局(教师招聘)" data-title="南京市雨花台区教育局所属学校2025年公开招聘教师公告">
                 <a href="https://edu.nanjing.gov.cn/bsfw/zpzk/202412/t20241217_5034667.html" class="job-title" target="_blank">南京市雨花台区教育局所属学校2025年公开招聘教师公告</a>
                 <div class="job-meta">
@@ -1523,13 +1624,6 @@
             </div>
             <div class="job-item" data-source="南京市教育局(教师招聘)" data-title="2025年南京市栖霞区公开招聘教师公告">
                 <a href="https://edu.nanjing.gov.cn/bsfw/zpzk/202412/t20241217_5034653.html" class="job-title" target="_blank">2025年南京市栖霞区公开招聘教师公告</a>
-                <div class="job-meta">
-                    <span class="source">南京市教育局(教师招聘)</span>
-                    <span class="date">2024-12-17</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="南京市教育局(教师招聘)" data-title="南京市秦淮区教育局所属学校2025年公开招聘教师公告">
-                <a href="https://edu.nanjing.gov.cn/bsfw/zpzk/202412/t20241217_5034658.html" class="job-title" target="_blank">南京市秦淮区教育局所属学校2025年公开招聘教师公告</a>
                 <div class="job-meta">
                     <span class="source">南京市教育局(教师招聘)</span>
                     <span class="date">2024-12-17</span>
@@ -1638,13 +1732,6 @@
         </div>
         <div class="job-list" data-month="2024-09">
 
-            <div class="job-item" data-source="江苏人事人才公共服务网（民办）" data-title="南京审计大学金审学院公开招聘人员公告">
-                <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/29/art_57212_11373805.html" class="job-title" target="_blank">南京审计大学金审学院公开招聘人员公告</a>
-                <div class="job-meta">
-                    <span class="source">江苏人事人才公共服务网（民办）</span>
-                    <span class="date">2024-09-29</span>
-                </div>
-            </div>
             <div class="job-item" data-source="江苏人事人才公共服务网（事业）" data-title="三江学院公开招聘人员公告">
                 <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/29/art_57210_11373809.html" class="job-title" target="_blank">三江学院公开招聘人员公告</a>
                 <div class="job-meta">
@@ -1652,17 +1739,24 @@
                     <span class="date">2024-09-29</span>
                 </div>
             </div>
-            <div class="job-item" data-source="江苏人事人才公共服务网（企业）" data-title="江苏粮食科技创新研究院公开招聘人员公告">
-                <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/24/art_57211_11368626.html" class="job-title" target="_blank">江苏粮食科技创新研究院公开招聘人员公告</a>
+            <div class="job-item" data-source="江苏人事人才公共服务网（民办）" data-title="南京审计大学金审学院公开招聘人员公告">
+                <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/29/art_57212_11373805.html" class="job-title" target="_blank">南京审计大学金审学院公开招聘人员公告</a>
                 <div class="job-meta">
-                    <span class="source">江苏人事人才公共服务网（企业）</span>
-                    <span class="date">2024-09-24</span>
+                    <span class="source">江苏人事人才公共服务网（民办）</span>
+                    <span class="date">2024-09-29</span>
                 </div>
             </div>
             <div class="job-item" data-source="江苏人事人才公共服务网（事业）" data-title="南京工业大学公开招聘人员公告">
                 <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/24/art_57210_11368623.html" class="job-title" target="_blank">南京工业大学公开招聘人员公告</a>
                 <div class="job-meta">
                     <span class="source">江苏人事人才公共服务网（事业）</span>
+                    <span class="date">2024-09-24</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="江苏人事人才公共服务网（企业）" data-title="江苏粮食科技创新研究院公开招聘人员公告">
+                <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/24/art_57211_11368626.html" class="job-title" target="_blank">江苏粮食科技创新研究院公开招聘人员公告</a>
+                <div class="job-meta">
+                    <span class="source">江苏人事人才公共服务网（企业）</span>
                     <span class="date">2024-09-24</span>
                 </div>
             </div>
@@ -1680,22 +1774,15 @@
                     <span class="date">2024-09-18</span>
                 </div>
             </div>
-            <div class="job-item" data-source="江苏人事人才公共服务网（民办）" data-title="金肯职业技术学院公开招聘人员公告">
-                <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/14/art_57212_11362094.html" class="job-title" target="_blank">金肯职业技术学院公开招聘人员公告</a>
-                <div class="job-meta">
-                    <span class="source">江苏人事人才公共服务网（民办）</span>
-                    <span class="date">2024-09-14</span>
-                </div>
-            </div>
-            <div class="job-item" data-source="江苏人事人才公共服务网（事业）" data-title="江苏省体育局水上运动管理中心公开招聘人员公告">
-                <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/14/art_57210_11362088.html" class="job-title" target="_blank">江苏省体育局水上运动管理中心公开招聘人员公告</a>
+            <div class="job-item" data-source="江苏人事人才公共服务网（事业）" data-title="南京水利科学研究院公开招聘人员公告">
+                <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/14/art_57210_11361334.html" class="job-title" target="_blank">南京水利科学研究院公开招聘人员公告</a>
                 <div class="job-meta">
                     <span class="source">江苏人事人才公共服务网（事业）</span>
                     <span class="date">2024-09-14</span>
                 </div>
             </div>
-            <div class="job-item" data-source="江苏人事人才公共服务网（事业）" data-title="南京水利科学研究院公开招聘人员公告">
-                <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/14/art_57210_11361334.html" class="job-title" target="_blank">南京水利科学研究院公开招聘人员公告</a>
+            <div class="job-item" data-source="江苏人事人才公共服务网（事业）" data-title="江苏省体育局水上运动管理中心公开招聘人员公告">
+                <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/14/art_57210_11362088.html" class="job-title" target="_blank">江苏省体育局水上运动管理中心公开招聘人员公告</a>
                 <div class="job-meta">
                     <span class="source">江苏人事人才公共服务网（事业）</span>
                     <span class="date">2024-09-14</span>
@@ -1709,14 +1796,21 @@
                 </div>
             </div>
             <div class="job-item" data-source="江苏人事人才公共服务网（民办）" data-title="金肯职业技术学院公开招聘人员公告">
-                <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/5/art_57212_11345348.html" class="job-title" target="_blank">金肯职业技术学院公开招聘人员公告</a>
+                <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/14/art_57212_11362094.html" class="job-title" target="_blank">金肯职业技术学院公开招聘人员公告</a>
+                <div class="job-meta">
+                    <span class="source">江苏人事人才公共服务网（民办）</span>
+                    <span class="date">2024-09-14</span>
+                </div>
+            </div>
+            <div class="job-item" data-source="江苏人事人才公共服务网（民办）" data-title="正德职业技术学院公开招聘人员公告">
+                <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/5/art_57212_11345562.html" class="job-title" target="_blank">正德职业技术学院公开招聘人员公告</a>
                 <div class="job-meta">
                     <span class="source">江苏人事人才公共服务网（民办）</span>
                     <span class="date">2024-09-05</span>
                 </div>
             </div>
-            <div class="job-item" data-source="江苏人事人才公共服务网（民办）" data-title="正德职业技术学院公开招聘人员公告">
-                <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/5/art_57212_11345562.html" class="job-title" target="_blank">正德职业技术学院公开招聘人员公告</a>
+            <div class="job-item" data-source="江苏人事人才公共服务网（民办）" data-title="金肯职业技术学院公开招聘人员公告">
+                <a href="http://jshrss.jiangsu.gov.cn/art/2024/9/5/art_57212_11345348.html" class="job-title" target="_blank">金肯职业技术学院公开招聘人员公告</a>
                 <div class="job-meta">
                     <span class="source">江苏人事人才公共服务网（民办）</span>
                     <span class="date">2024-09-05</span>
@@ -1733,15 +1827,15 @@
         </div>
         <div class="job-list" data-month="2024-08">
 
-            <div class="job-item" data-source="江苏人事人才公共服务网（事业）" data-title="南京水利科学研究院公开招聘人员公告">
-                <a href="http://jshrss.jiangsu.gov.cn/art/2024/8/23/art_57210_11332481.html" class="job-title" target="_blank">南京水利科学研究院公开招聘人员公告</a>
+            <div class="job-item" data-source="江苏人事人才公共服务网（事业）" data-title="三江学院公开招聘人员公告">
+                <a href="http://jshrss.jiangsu.gov.cn/art/2024/8/23/art_57210_11332107.html" class="job-title" target="_blank">三江学院公开招聘人员公告</a>
                 <div class="job-meta">
                     <span class="source">江苏人事人才公共服务网（事业）</span>
                     <span class="date">2024-08-23</span>
                 </div>
             </div>
-            <div class="job-item" data-source="江苏人事人才公共服务网（事业）" data-title="三江学院公开招聘人员公告">
-                <a href="http://jshrss.jiangsu.gov.cn/art/2024/8/23/art_57210_11332107.html" class="job-title" target="_blank">三江学院公开招聘人员公告</a>
+            <div class="job-item" data-source="江苏人事人才公共服务网（事业）" data-title="南京水利科学研究院公开招聘人员公告">
+                <a href="http://jshrss.jiangsu.gov.cn/art/2024/8/23/art_57210_11332481.html" class="job-title" target="_blank">南京水利科学研究院公开招聘人员公告</a>
                 <div class="job-meta">
                     <span class="source">江苏人事人才公共服务网（事业）</span>
                     <span class="date">2024-08-23</span>
@@ -1754,13 +1848,6 @@
                     <span class="date">2024-08-19</span>
                 </div>
             </div>
-            <div class="job-item" data-source="江苏人事人才公共服务网（民办）" data-title="金肯职业技术学院公开招聘人员公告">
-                <a href="http://jshrss.jiangsu.gov.cn/art/2024/8/7/art_57212_11318467.html" class="job-title" target="_blank">金肯职业技术学院公开招聘人员公告</a>
-                <div class="job-meta">
-                    <span class="source">江苏人事人才公共服务网（民办）</span>
-                    <span class="date">2024-08-07</span>
-                </div>
-            </div>
             <div class="job-item" data-source="江苏人事人才公共服务网（事业）" data-title="南京水利科学研究院公开招聘人员公告">
                 <a href="http://jshrss.jiangsu.gov.cn/art/2024/8/7/art_57210_11318466.html" class="job-title" target="_blank">南京水利科学研究院公开招聘人员公告</a>
                 <div class="job-meta">
@@ -1768,81 +1855,101 @@
                     <span class="date">2024-08-07</span>
                 </div>
             </div>
+            <div class="job-item" data-source="江苏人事人才公共服务网（民办）" data-title="金肯职业技术学院公开招聘人员公告">
+                <a href="http://jshrss.jiangsu.gov.cn/art/2024/8/7/art_57212_11318467.html" class="job-title" target="_blank">金肯职业技术学院公开招聘人员公告</a>
+                <div class="job-meta">
+                    <span class="source">江苏人事人才公共服务网（民办）</span>
+                    <span class="date">2024-08-07</span>
+                </div>
+            </div>
             <div class="no-results">没有找到匹配的职位</div>
         </div>
         <footer>
-            <p>最后更新时间：2025-01-31</p>
+            <p>最后更新时间：2025-02-01</p>
         </footer>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script>
-        const tabs = document.querySelectorAll('.tab');
-        const jobLists = document.querySelectorAll('.job-list');
-        const sourceFilter = document.getElementById('sourceFilter');
-        const searchInput = document.getElementById('searchInput');
-        const tabSlider = document.querySelector('.tab-slider');
-
-        // Initialize tab slider position
-        function updateTabSlider(tab) {
-            tabSlider.style.width = tab.offsetWidth + 'px';
-            tabSlider.style.left = tab.offsetLeft + 'px';
-        }
-
-        updateTabSlider(document.querySelector('.tab.active'));
-
-        // Tab switching
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                // Update active states
-                tabs.forEach(t => t.classList.remove('active'));
-                jobLists.forEach(list => list.classList.remove('active'));
-
-                tab.classList.add('active');
-                const month = tab.dataset.month;
-                document.querySelector(`.job-list[data-month="${month}"]`).classList.add('active');
-
-                // Animate the slider
-                updateTabSlider(tab);
-
-                // Reset filters
-                sourceFilter.value = '';
-                searchInput.value = '';
-                filterJobs();
-            });
-        });
-
-        function filterJobs() {
-            const selectedSource = sourceFilter.value;
-            const searchText = searchInput.value.toLowerCase();
-            const activeList = document.querySelector('.job-list.active');
-            const jobItems = activeList.querySelectorAll('.job-item');
-            const noResults = activeList.querySelector('.no-results');
-            let visibleCount = 0;
-
-            jobItems.forEach(item => {
-                const source = item.dataset.source;
-                const title = item.dataset.title.toLowerCase();
-
-                const sourceMatch = !selectedSource || source === selectedSource;
-                const searchMatch = !searchText || title.includes(searchText);
-
-                if (sourceMatch && searchMatch) {
-                    item.style.display = '';
-                    visibleCount++;
-                } else {
-                    item.style.display = 'none';
-                }
+        $(document).ready(function() {
+            // Initialize select2 with automatic width
+            $('#sourceFilter').select2({
+                placeholder: '选择来源',
+                allowClear: true,
+                width: 'auto',
+                dropdownAutoWidth: true
             });
 
-            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
-        }
+            const tabs = document.querySelectorAll('.tab');
+            const jobLists = document.querySelectorAll('.job-list');
+            const sourceFilter = document.getElementById('sourceFilter');
+            const searchInput = document.getElementById('searchInput');
+            const tabSlider = document.querySelector('.tab-slider');
 
-        sourceFilter.addEventListener('change', filterJobs);
-        searchInput.addEventListener('input', filterJobs);
+            // Initialize tab slider position
+            function updateTabSlider(tab) {
+                tabSlider.style.width = tab.offsetWidth + 'px';
+                tabSlider.style.left = tab.offsetLeft + 'px';
+            }
 
-        // Handle window resize
-        window.addEventListener('resize', () => {
             updateTabSlider(document.querySelector('.tab.active'));
+
+            // Tab switching
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Update active states
+                    tabs.forEach(t => t.classList.remove('active'));
+                    jobLists.forEach(list => list.classList.remove('active'));
+
+                    tab.classList.add('active');
+                    const month = tab.dataset.month;
+                    document.querySelector(`.job-list[data-month="${month}"]`).classList.add('active');
+
+                    // Animate the slider
+                    updateTabSlider(tab);
+
+                    // Reset filters
+                    $('#sourceFilter').val('').trigger('change');
+                    searchInput.value = '';
+                    filterJobs();
+                });
+            });
+
+            function filterJobs() {
+                const selectedSource = sourceFilter.value;
+                const searchText = searchInput.value.toLowerCase();
+                const activeList = document.querySelector('.job-list.active');
+                const jobItems = activeList.querySelectorAll('.job-item');
+                const noResults = activeList.querySelector('.no-results');
+                let visibleCount = 0;
+
+                jobItems.forEach(item => {
+                    const source = item.dataset.source;
+                    const title = item.dataset.title.toLowerCase();
+
+                    const sourceMatch = !selectedSource || source === selectedSource;
+                    const searchMatch = !searchText || title.includes(searchText);
+
+                    if (sourceMatch && searchMatch) {
+                        item.style.display = '';
+                        visibleCount++;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+
+                noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+            }
+
+            // Bind events
+            $('#sourceFilter').on('change', filterJobs);
+            searchInput.addEventListener('input', filterJobs);
+
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                updateTabSlider(document.querySelector('.tab.active'));
+            });
         });
     </script>
 </body>
